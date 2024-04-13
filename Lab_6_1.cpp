@@ -5,11 +5,15 @@ const double PI = acos(-1.0);
 class PointDecart { //Адаптировать к нему
 public:
     PointDecart() {};
-    virtual double get_x() { return 0; };
-    virtual double get_y() { return 0; };
-    virtual void set_x(double x_) {};
-    virtual void set_y(double y_) {};
-    virtual void out() {};
+    PointDecart(double x_, double y_): x(x_), y(y_) {};
+    virtual double get_x() { return x; };
+    virtual double get_y() { return y; };
+    virtual void set_x(double x_) { x = x_; };
+    virtual void set_y(double y_) { y = y_; };
+    virtual void out() { std::cout << "Cartesian coordinates. X = " << x << ", Y = " << y << std::endl; };
+private:
+    double x;
+    double y;
 };
 
 class PointPolar { //Адаптируемый класс
@@ -51,6 +55,8 @@ int main()
 {
     PointPolar* polar = new PointPolar(90, 5);
     PointDecart* adapted = new ObjectPointPolarAdapter(polar);
+    PointDecart* cartesian = new PointDecart(0, 5);
     polar->own_out();
     adapted->out();
+    cartesian->out();
 }
